@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Portafolio | Elias Valle</title>
+    <style>
+        /* --- ESTILO MONOCROMATICO Y MINIMALISTA --- */
+        :root {
+            --bg-color: #111111; /* Fondo oscuro casi negro */
+            --text-color: #f4f4f4; /* Texto casi blanco */
+            --accent-color: #888888; /* Gris para detalles */
+            --highlight: #ffffff; /* Blanco puro para hover */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+
+        nav {
+            margin-top: 30px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        nav a {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- SECCIONES GENERALES --- */
+        section {
+            padding: 60px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            border-bottom: 1px solid #222;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            padding-left: 10px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--highlight);
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #ccc;
+            text-align: justify;
+        }
+
+        /* --- PERFIL PROFESIONAL --- */
+        .bio-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .botonprueba{ 
+            background-color: black;
+            border: 1px solid black;
+            font-family:"Roboto", sans-serif;
+            color:darkred;
+
+        }
+
+        /* --- PROYECTOS (INTERACTIVOS) --- */
+        .project-card {
+            background: #1a1a1a;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid #333;
+            transition: transform 0.3s, border-color 0.3s;
+            /* Nuevas propiedades para la interaccion */
+            cursor: pointer;
+            position: relative; 
+        }
+
+        .project-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-color);
+        }
+
+        /* Estilo del Icono (+) */
+        .toggle-icon {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 2rem;
+            line-height: 1rem;
+            color: var(--accent-color);
+            transition: transform 0.4s ease;
+            user-select: none;
+        }
+
+        /* Estilos del contenido oculto (Extracto) */
+        .extracto {
+            font-style: italic;
+            border-left: 2px solid #555;
+            padding-left: 15px;
+            margin-top: 20px;
+            color: #999;
+            /* Oculto por defecto */
+            display: none;
+        }
+.playwrite-nz-basic-guides-regular {
+  font-family: "Playwrite NZ Basic Guides", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+        /* --- CLASES ACTIVAS (JavaScript) --- */
+        /* Cuando la tarjeta tiene la clase .is-open */
+        .project-card.is-open .extracto {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .project-card.is-open .toggle-icon {
+            transform: rotate(45deg); /* Gira para formar una X */
+            color: var(--highlight);
+        }
+
+        .project-card.is-open {
+            border-color: var(--highlight);
+            background: #222;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .meta {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* --- GALERIA DE FOTOS --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .photo-item {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+            background: #222;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.3s, transform 0.5s;
+        }
+
+        .photo-item:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        /* --- SOCIAL MEDIA / SPOTS --- */
+        /* Estilo del boton desplegable (summary) */
+    details.work-samples summary {
+        cursor: pointer;
+        color: var(--accent-color);
+        font-weight: bold;
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #333;
+        border-radius: 4px;
+        background-color: #222; /* Un poco mas claro que el fondo */
+        list-style: none; /* Opcional: quita el triangulo default */
+        transition: all 0.3s ease;
+        user-select: none;
+    }
+
+    details.work-samples summary:hover {
+        background-color: #333;
+        color: var(--highlight);
+        border-color: var(--accent-color);
+    }
+
+    /* Contenedor que se despliega */
+    .sample-content {
+        margin-top: 15px;
+        padding: 15px;
+        background: #111; /* Fondo muy oscuro para contraste */
+        border: 1px solid #333;
+        border-radius: 4px;
+        text-align: left; /* Para que las listas se lean mejor */
+        animation: fadeIn 0.4s ease;
+    }
+
+    /* Listas de Links (Twitter / Blog) */
+    .sample-content ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .sample-content li {
+        margin-bottom: 8px;
+    }
+
+    .sample-content a {
+        display: block;
+        padding: 10px;
+        background-color: #1a1a1a;
+        border: 1px solid #333;
+        color: #ccc;
+        border-radius: 4px;
+        font-size: 0.9rem;
+    }
+
+    .sample-content a:hover {
+        border-color: var(--accent-color);
+        background-color: #222;
+        color: var(--highlight);
+        transform: translateX(5px); /* Pequeno desplazamiento al hacer hover */
+    }
+
+    /* Ajustes para el Audio (Radio Oro) */
+    .audio-item {
+        margin-bottom: 15px;
+        border-bottom: 1px solid #222;
+        padding-bottom: 10px;
+    }
+
+    .audio-item:last-child {
+        border-bottom: none;
+    }
+
+    .audio-item span {
+        display: block;
+        font-size: 0.85rem;
+        color: var(--accent-color);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Personalizacion basica del reproductor */
+    audio {
+        width: 100%;
+        height: 35px;
+        filter: invert(0.9) hue-rotate(180deg); /* Truco para volver oscuro el reproductor nativo */
+        border-radius: 4px;
+    }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            font-size: 0.8rem;
+            color: var(--accent-color);
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .bio-grid { grid-template-columns: 1fr 1fr; }
+            h1 { font-size: 4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Elías Valle</h1>
+        <p class="subtitle">Escritor | Escritor SEO| Community Manager | Fotografía</p>
+        <nav>
+            <ul>
+                <li><a href="#perfil">Perfíl</a></li>
+                <li><a href="#narrativa">Narrativa</a></li>
+                <li><a href="#fotografia">Fotografía</a></li>
+                <li><a href="#copywriting">Copywriting</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="perfil">
+        <h2>Sobre Mí</h2>
+        <div class="bio-grid">
+            <div>
+                <p>Especialista en redaccion creativa y estrategia digital con experiencia solida en el sector publico. He colaborado en el rediseno UX de la Secretaria de la Funcion Publica y gestionado comunidades digitales para gobierno y medios.</p>
+            </div>
+            <div>
+                <p>Mi enfoque combina la tecnica del SEO con la sensibilidad artistica de la narrativa y la fotografia. Busco transformar datos complejos en historias humanas y experiencias de usuario intuitivas.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="narrativa">
+        <h2>Narrativa & Guión</h2>
+        
+ <div class="project-card">
+    <div class="toggle-icon">+</div>
+    <span class="meta">Novela Negra | Drama</span> 
+    
+    <h3>
+        <a href="https://docs.google.com/document/d/1wSxdnAWKbcbj2GI0tJAziIW4J9Vmn9rFdvm2-2KXzE4/edit?usp=sharing" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           style="text-decoration: none; color: inherit; display: block; width: 100%;">
+            Los muertos son tambien mis amigos
+        </a>
+    </h3>
+   
+    <p>Novela sobre el conflicto interno de un detective al investigar un caso de ninos desaparecidos en un pueblo a las afueras de Cuernavaca. Combina terror cosmico, comedia y drama.</p>
+
+    <div class="extracto">
+        "Estoy recogiendo lo que dejaste atras. Otra vez. Como todos los dias... Lavar las tazas de cafe que abandonas por toda la casa no se siente ni bien ni mal."
+        <a href="https://docs.google.com/document/d/1wSxdnAWKbcbj2GI0tJAziIW4J9Vmn9rFdvm2-2KXzE4/edit?usp=sharing" 
+           target="_blank" class="playwrite-nz-basic-guides-regular"> Clic aqui</a>
+    </div>
+
+</div> ```
+
+        <div class="project-card">
+            <div class="toggle-icon">+</div> <span class="meta">Comic | Sci-Fi</span>
+            <h3>  <a href="https://docs.google.com/document/d/1aVLuwlnBtcTX8NWT76kW3Z4KK-la7W9zcQzkR9pc77M/edit?usp=sharing" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           style="text-decoration: none; color: inherit; display: block; width: 100%;">
+           Life as a Glitch
+        </a>
+    </h3>
+            <p>México en el futuro próximo...
+La Inteligencia Artificial ha sido utilizada por el gobierno en turno para el control total de la vida misma, incluida la manipulación de recursos naturales. Una falla en el sistema provoca una ola de suicidios masivos, donde nuestro protagonista deberá investigar quién está detrás de la falla ¿Error humano? ¿Error artificial? ¿Error Provocado?
+“Life as a Glitch” constituye la parte gráfica y narrativa del proyecto musical de Glitch Hop del productor Amotken.
+A continuación una breve muestra...</p>
+            
+            <div class="extracto">
+
+Cuadro 1: El PROTAGONISTA está sentado con la cabeza entre las manos, en la misma sala del inicio de la CASA DE SEGURIDAD.<br>
+Cuadro 2: 6 PERSONAS ENMASCARADAS paradas en semicírculo frente a él.
+AHZ en el centro, frente a nuestro protagonista.<br>
+Cuadro 3: Detrás de AHZ y de los ENMASCARADOS, las VENTANAS que dan al EXTERIOR, tapadas con tela roída. Podemos ver algunas filtraciones de la luz de la LUNA penetrando la habitación.<br>
+Una de estas filtraciones tiene un tono rojizo apenas distinguible de entre las demás.<br>
+Cuadro 4: CLOSE UP a la pequeña luz roja.<br>
+Cuadro 5: AHZ mira seriamente al PROTAGONISTA, que parece lamentarse, sin embargo su rostro apenas refleja cierta aflicción. Resulta un gesto casi imparcial. Sin emoción. Parece cansado.<br>
+Cuadro 6: de frente al protagonista aún con la cabeza entre las manos<br>
+PROTAGONISTA<br>
+No tiene sentido.
+Esto...Ella debía mejorar…
+Era la respuesta.
+Pero…¿Cómo pudo ocultarse
+todo esto?<br>
+ <a href="https://docs.google.com/document/d/1aVLuwlnBtcTX8NWT76kW3Z4KK-la7W9zcQzkR9pc77M/edit?usp=sharing" 
+           target="_blank" 
+           target="_blank" class="botonprueba"> Clic aqui</a>
+            </div>
+    </div>
+    </section>
+
+    <section id="fotografia">
+        <h2>Fotografía</h2>
+        <p>Una breve muestra de mi trabajo fotográfico.</p>
+        <div class="gallery-grid">
+            <div class="photo-item">
+                <a href="https://lh3.googleusercontent.com/d/192ViZUoEq4SqSdhOUSCRQ0DJP_v-dIPN" target="_blank" rel="noopener noreferrer">
+                    <img src="https://lh3.googleusercontent.com/d/192ViZUoEq4SqSdhOUSCRQ0DJP_v-dIPN" alt="Nos hemos querido demasiado">
+                </a>
+            </div>
+            <div class="photo-item">
+                <a href="https://lh3.googleusercontent.com/d/15eHhbFtgjKVHmMntrRa5WSO67rM7VSuA" target="_blank" rel="noopener noreferrer">
+                    <img src="https://lh3.googleusercontent.com/d/15eHhbFtgjKVHmMntrRa5WSO67rM7VSuA" alt="Yo te espero, aunque no lo notes">
+                </a>
+            </div>
+            <div class="photo-item">
+                 <a href="https://lh3.googleusercontent.com/d/1UOJUT_7cwRCn8SwDL7oQT0I37W6x4iHv" target="_blank" rel="noopener noreferrer">
+                    <img src="https://lh3.googleusercontent.com/d/1UOJUT_7cwRCn8SwDL7oQT0I37W6x4iHv" alt="Dame la mano aunque me tengas miedo">
+                </a>
+            </div>
+            <div class="photo-item">
+                <a href="https://lh3.googleusercontent.com/d/1K9cmsBCjl77tjjceVAEMhtGzwak_461D" target="_blank" rel="noopener noreferrer">
+                    <img src="https://lh3.googleusercontent.com/d/1K9cmsBCjl77tjjceVAEMhtGzwak_461D" alt="Algo me habla desde arriba">
+                </a>
+            </div>
+            <div class="photo-item">
+                <a href="https://lh3.googleusercontent.com/d/17FwqvVLUjFXXF1r1xM4XRBTWKoFQGJVA" target="_blank" rel="noopener noreferrer">
+                    <img src="https://lh3.googleusercontent.com/d/17FwqvVLUjFXXF1r1xM4XRBTWKoFQGJVA" alt="Sé lo que no soy para tí">
+                </a>
+            </div>
+            <div class="photo-item">
+                <a href="https://lh3.googleusercontent.com/d/1iiDNFfr7GEu4-_ilovwhbQ4k0dpIyXDx" target="_blank" rel="noopener noreferrer">
+                    <img src="https://lh3.googleusercontent.com/d/1iiDNFfr7GEu4-_ilovwhbQ4k0dpIyXDx" alt="Enciende la luz, que no te quiero ver">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="copywriting">
+        <h2>Copywriting & Gestion Publica</h2>
+        <p>Experiencia en redaccion institucional, spots comerciales y articulos para web.</p>
+
+        <div class="social-proof">
+
+    <div class="social-card">
+        <h3>Gobierno de Puebla</h3>
+        <p>Una breve muestra de los copys y propuestas de publicaciones de redes sociales oficiales para el Gobierno del Estado de Puebla:</p>
+        
+        <details class="work-samples">
+            <summary>Ver publicaciones (Twitter)</summary>
+            <div class="sample-content">
+                <ul>
+                    <li>
+                        <a href="http://x.com/BuenGobiernoPue/status/1752767719286702360" target="_blank">
+                            🐦 Primer Informe
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://x.com/BuenGobiernoPue/status/1661906430931369984" target="_blank">
+                            🐦 Reunión Nacional Contralores
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://x.com/BuenGobiernoPue/status/1616187904635834368" target="_blank">
+                            🐦 Cuarto Informe
+                        </a>
+                    </li>
+                     <li>
+                        <a href="https://x.com/buengobiernopue/status/1562098605283999748?s=484" target="_blank">
+                            🐦 Rehabilitación
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://x.com/buengobiernopue/status/1564674314971926528?s=48" target="_blank">
+                            🐦 Pavimentación
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <div class="social-card">
+        <h3>Radio Oro</h3>
+        <p>muestra de los spots comerciales trabajados para los clientes comerciales de RadioOro:</p>
+        
+        <details class="work-samples">
+            <summary>Escuchar spots (Audio)</summary>
+            <div class="sample-content">
+                <div class="audio-item">
+                <span>Spot Comercial Automotriz:</span>
+                <audio controls style="width: 100%;">
+                <source src="audios/cap11.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+</div>
+                <div class="audio-item">
+                    <span>Guion Promocional Navidad:</span>
+                    <audio controls>
+                        <source src="audios/cap2seplar_xecd.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+                <div class="audio-item">
+                    <span>Intro de Programa:</span>
+                    <audio controls>
+                        <source src="audios/cap10_jlenn.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+                 <div class="audio-item">
+                    <span>Intro de Programa:</span>
+                    <audio controls>
+                        <source src="audios/cap3_frmerc.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <div class="social-card">
+        <h3>ReviewBox Mexico</h3>
+        <p>Una breve muestra de los artículos trabajados para Reviewbox México:</p>
+        
+        <details class="work-samples">
+            <summary>Leer articulos (Blog)</summary>
+            <div class="sample-content">
+                <ul>
+                    <li>
+                        <a href="https://reviewbox.com.mx/articulo1" target="_blank">
+                            🔗 Los mejores microfonos para podcast
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://reviewbox.com.mx/articulo2" target="_blank">
+                            🔗 Resena: Laptop HP Pavilion
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://reviewbox.com.mx/articulo3" target="_blank">
+                            🔗 Guia de compra: Cafeteras Italianas
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+</div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Elias Valle. Todos los derechos reservados.</p>
+        <p>Contacto: eliasvallerdz64@gmail.com</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', () => {
+                // Alterna la clase 'is-open' en la tarjeta clickeada
+                card.classList.toggle('is-open');
+            });
+        });
+    </script>
+
+</body>
+</html>
