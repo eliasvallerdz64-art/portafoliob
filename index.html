@@ -11,13 +11,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Portafolio | Elias Valle</title>
-    <style>
-        /* --- ESTILO MONOCROMATICO Y MINIMALISTA --- */
+   <style>
+        /* --- ESTILO DINÁMICO NEGRO & NARANJA CON ANIMACIÓN --- */
         :root {
-            --bg-color: #111111; /* Fondo oscuro casi negro */
-            --text-color: #f4f4f4; /* Texto casi blanco */
-            --accent-color: #888888; /* Gris para detalles */
-            --highlight: #ffffff; /* Blanco puro para hover */
+            --bg-color: #0a0a0a;
+            --text-color: #e0e0e0;
+            --accent-color: #ff6600; 
+            --accent-hover: #ff8533;
+            --card-bg: #141414;
+            --highlight: #ffffff;
         }
 
         * {
@@ -27,303 +29,189 @@
         }
 
         body {
-            font-family: 'Roboto', Helvetica, Arial, sans-serif;
+            font-family: 'Open Sans', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-        }
-
-        a {
-            text-decoration: none;
-            color: var(--text-color);
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: var(--accent-color);
+            overflow-x: hidden;
         }
 
         /* --- HEADER & NAV --- */
         header {
-            padding: 40px 20px;
+            padding: 100px 20px;
             text-align: center;
-            border-bottom: 1px solid #333;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+            border-bottom: 4px solid var(--accent-color);
         }
 
         h1 {
-            font-size: 3rem;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 900;
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
             text-transform: uppercase;
-            letter-spacing: 5px;
-            margin-bottom: 10px;
+            letter-spacing: -2px;
+            color: var(--highlight);
+            line-height: 0.9;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        /* Efecto de sacudida y brillo en el nombre */
+        h1:hover {
+            text-shadow: 3px 3px 0px var(--accent-color), -3px -3px 0px #00ffff;
+            transform: skewX(-2deg);
         }
 
         p.subtitle {
             color: var(--accent-color);
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-        }
-
-        nav {
-            margin-top: 30px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        nav a {
-            font-size: 0.9rem;
+            font-size: 1rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin-top: 15px;
         }
 
-        /* --- SECCIONES GENERALES --- */
-        section {
-            padding: 60px 20px;
-            max-width: 900px;
-            margin: 0 auto;
-            border-bottom: 1px solid #222;
+        nav { margin-top: 40px; }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
+        nav a {
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 8px 15px;
+            transition: 0.3s;
+            color: var(--text-color);
+            text-decoration: none;
+            border: 1px solid transparent;
         }
+
+        nav a:hover {
+            color: var(--accent-color);
+            background: rgba(255, 102, 0, 0.1);
+            border: 1px solid var(--accent-color);
+        }
+
+        /* --- SECCIONES Y TÍTULOS --- */
+        section { padding: 80px 20px; max-width: 1000px; margin: 0 auto; }
 
         h2 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            padding-left: 10px;
-            border-left: 4px solid var(--accent-color);
-        }
-
-        h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
             color: var(--highlight);
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.4s ease;
+            display: inline-block;
         }
 
-        p {
-            margin-bottom: 20px;
-            color: #ccc;
-            text-align: justify;
+        /* Efecto de línea expansiva y movimiento en H2 */
+        h2:hover {
+            color: var(--accent-color);
+            transform: translateX(15px);
         }
 
-        /* --- PERFIL PROFESIONAL --- */
-        .bio-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 4px;
+            background: var(--accent-color);
+            transition: width 0.4s ease;
         }
 
-        .botonprueba{ 
-            background-color: black;
-            border: 1px solid black;
-            font-family:"Bebas Neue", sans-serif;
-            color:darkred;
+        h2:hover::after { width: 100%; }
 
-        }
+        h3 { font-size: 1.6rem; color: var(--accent-color); margin-bottom: 10px; }
+        p { margin-bottom: 20px; color: #bbb; }
 
-        /* --- PROYECTOS (INTERACTIVOS) --- */
+        /* --- TARJETAS DE PROYECTO --- */
         .project-card {
-            background: #1a1a1a;
-            padding: 30px;
-            margin-bottom: 30px;
-            border: 1px solid #333;
-            transition: transform 0.3s, border-color 0.3s;
-            /* Nuevas propiedades para la interaccion */
+            background: var(--card-bg);
+            padding: 40px;
+            margin-bottom: 25px;
+            border: 1px solid #222;
+            transition: all 0.3s ease;
             cursor: pointer;
-            position: relative; 
+            position: relative;
+            overflow: hidden;
         }
 
         .project-card:hover {
-            transform: translateY(-2px);
             border-color: var(--accent-color);
+            box-shadow: inset 0 0 20px rgba(255, 102, 0, 0.05);
         }
 
-        /* Estilo del Icono (+) */
-        .toggle-icon {
+        /* Indicador visual de hover lateral */
+        .project-card::before {
+            content: '';
             position: absolute;
-            top: 25px;
-            right: 25px;
-            font-size: 2rem;
-            line-height: 1rem;
-            color: var(--accent-color);
-            transition: transform 0.4s ease;
-            user-select: none;
+            left: 0; top: 0; height: 100%; width: 0;
+            background: var(--accent-color);
+            transition: width 0.2s ease;
         }
 
-        /* Estilos del contenido oculto (Extracto) */
+        .project-card:hover::before { width: 5px; }
+
+        .meta { font-size: 0.75rem; font-weight: 700; color: #666; letter-spacing: 2px; text-transform: uppercase; }
+
+        .toggle-icon {
+            position: absolute; top: 20px; right: 20px;
+            color: var(--accent-color); font-size: 1.5rem; transition: 0.4s;
+        }
+
         .extracto {
-            font-style: italic;
-            border-left: 2px solid #555;
-            padding-left: 15px;
-            margin-top: 20px;
-            color: #999;
-            /* Oculto por defecto */
-            display: none;
-        }
-.playwrite-nz-basic-guides-regular {
-  font-family: "Playwrite NZ Basic Guides", cursive;
-  font-weight: 400;
-  font-style: normal;
-}
-
-        /* --- CLASES ACTIVAS (JavaScript) --- */
-        /* Cuando la tarjeta tiene la clase .is-open */
-        .project-card.is-open .extracto {
-            display: block;
-            animation: fadeIn 0.5s ease;
+            margin-top: 25px; padding: 20px; background: #000;
+            border-left: 2px solid var(--accent-color); display: none;
         }
 
-        .project-card.is-open .toggle-icon {
-            transform: rotate(45deg); /* Gira para formar una X */
-            color: var(--highlight);
+        /* Botones */
+        .botonprueba, .playwrite-nz-basic-guides-regular {
+            display: inline-block; padding: 10px 20px;
+            background: var(--accent-color); color: black !important;
+            font-weight: 900; text-transform: uppercase; text-decoration: none;
+            transition: 0.3s; margin-top: 15px;
         }
 
-        .project-card.is-open {
-            border-color: var(--highlight);
-            background: #222;
+        .botonprueba:hover { background: var(--highlight); transform: translateY(-3px); }
+
+        /* --- GALERÍA --- */
+        .photo-item { border: 2px solid #1a1a1a; filter: grayscale(1); transition: 0.5s; }
+        .photo-item:hover { filter: grayscale(0); border-color: var(--accent-color); transform: scale(1.03); }
+
+        /* --- ACORDEONES --- */
+        details.work-samples summary {
+            padding: 15px; background: #1a1a1a; color: var(--highlight);
+            font-weight: 700; border: 1px solid #333; cursor: pointer;
         }
+
+        .sample-content a {
+            background: #050505; border: 1px solid #222; color: var(--text-color);
+            margin-bottom: 5px; padding: 12px; display: block; transition: 0.3s;
+        }
+
+        .sample-content a:hover {
+            background: var(--accent-color); color: #000; transform: skewX(-8deg);
+        }
+
+        audio { filter: invert(1) hue-rotate(150deg); width: 100%; margin-top: 10px; }
+
+        /* --- FOOTER --- */
+        footer { background: #000; padding: 60px 20px; border-top: 2px solid var(--accent-color); color: #666; text-align: center; }
+
+        /* Estados Activos */
+        .project-card.is-open { background: #1a1a1a; }
+        .project-card.is-open .extracto { display: block; animation: fadeIn 0.4s forwards; }
+        .project-card.is-open .toggle-icon { transform: rotate(45deg); color: var(--highlight); }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .meta {
-            font-size: 0.8rem;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        /* --- GALERIA DE FOTOS --- */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-
-        .photo-item {
-            position: relative;
-            height: 250px;
-            overflow: hidden;
-            background: #222;
-        }
-
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%);
-            transition: filter 0.3s, transform 0.5s;
-        }
-
-        .photo-item:hover img {
-            filter: grayscale(0%);
-            transform: scale(1.05);
-        }
-
-        /* --- SOCIAL MEDIA / SPOTS --- */
-        /* Estilo del boton desplegable (summary) */
-    details.work-samples summary {
-        cursor: pointer;
-        color: var(--accent-color);
-        font-weight: bold;
-        margin-top: 20px;
-        padding: 10px;
-        border: 1px solid #333;
-        border-radius: 4px;
-        background-color: #222; /* Un poco mas claro que el fondo */
-        list-style: none; /* Opcional: quita el triangulo default */
-        transition: all 0.3s ease;
-        user-select: none;
-    }
-
-    details.work-samples summary:hover {
-        background-color: #333;
-        color: var(--highlight);
-        border-color: var(--accent-color);
-    }
-
-    /* Contenedor que se despliega */
-    .sample-content {
-        margin-top: 15px;
-        padding: 15px;
-        background: #111; /* Fondo muy oscuro para contraste */
-        border: 1px solid #333;
-        border-radius: 4px;
-        text-align: left; /* Para que las listas se lean mejor */
-        animation: fadeIn 0.4s ease;
-    }
-
-    /* Listas de Links (Twitter / Blog) */
-    .sample-content ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .sample-content li {
-        margin-bottom: 8px;
-    }
-
-    .sample-content a {
-        display: block;
-        padding: 10px;
-        background-color: #1a1a1a;
-        border: 1px solid #333;
-        color: #ccc;
-        border-radius: 4px;
-        font-size: 0.9rem;
-    }
-
-    .sample-content a:hover {
-        border-color: var(--accent-color);
-        background-color: #222;
-        color: var(--highlight);
-        transform: translateX(5px); /* Pequeno desplazamiento al hacer hover */
-    }
-
-    /* Ajustes para el Audio (Radio Oro) */
-    .audio-item {
-        margin-bottom: 15px;
-        border-bottom: 1px solid #222;
-        padding-bottom: 10px;
-    }
-
-    .audio-item:last-child {
-        border-bottom: none;
-    }
-
-    .audio-item span {
-        display: block;
-        font-size: 0.85rem;
-        color: var(--accent-color);
-        margin-bottom: 8px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    /* Personalizacion basica del reproductor */
-    audio {
-        width: 100%;
-        height: 35px;
-        filter: invert(0.9) hue-rotate(180deg); /* Truco para volver oscuro el reproductor nativo */
-        border-radius: 4px;
-    }
-
-        /* --- FOOTER --- */
-        footer {
-            text-align: center;
-            padding: 50px 20px;
-            font-size: 0.8rem;
-            color: var(--accent-color);
-        }
-
-        /* Responsive */
         @media (min-width: 768px) {
-            .bio-grid { grid-template-columns: 1fr 1fr; }
-            h1 { font-size: 4rem; }
+            .bio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         }
     </style>
 </head>
