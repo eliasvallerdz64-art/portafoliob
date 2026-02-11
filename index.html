@@ -47,7 +47,7 @@
         h1 {
             font-family: 'Roboto', sans-serif;
             font-weight: 900;
-            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-size: clamp(3.5rem, 10vw, 8.5rem);
             text-transform: uppercase;
             letter-spacing: -2px;
             color: var(--highlight);
@@ -177,9 +177,40 @@
         .botonprueba:hover { background: var(--highlight); transform: translateY(-3px); }
 
         /* --- GALERÍA --- */
-        .photo-item { border: 2px solid #1a1a1a; filter: grayscale(1); transition: 0.5s; }
-        .photo-item:hover { filter: grayscale(0); border-color: var(--accent-color); transform: scale(1.03); }
+.photo-item { 
+    border: 2px solid #1a1a1a; 
+    filter: grayscale(1); 
+    transition: 0.5s; 
+    overflow: hidden; /* Esto evita que la imagen se salga del cuadro */
+    height: 250px; /* Altura fija para que todas las cajas sean iguales */
+}
 
+/* Agrega esto para controlar la imagen dentro de la caja */
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Esto recorta la imagen para que llene el cuadro sin estirarse */
+    display: block;
+}
+
+.photo-item:hover { 
+    filter: grayscale(0); 
+    border-color: var(--accent-color); 
+    transform: scale(1.03); 
+}
+        .gallery-grid {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr); /* Esto crea las 3 columnas */
+               gap: 20px; /* Espacio entre fotos */
+                width: 100%;
+}
+
+/* IMPORTANTE: Para que se vea bien en celulares (1 sola columna) */
+        @media (max-width: 768px) {
+        .gallery-grid {
+        grid-template-columns: 1fr; /* En celular, 1 sola columna */
+    }
+}
         /* --- ACORDEONES --- */
         details.work-samples summary {
             padding: 15px; background: #1a1a1a; color: var(--highlight);
